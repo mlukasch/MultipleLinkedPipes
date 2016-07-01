@@ -5,3 +5,5 @@ mkdir -p ./volumes/linkedpipes1/log
 
 mkdir -p ./volumes/linkedpipes2/data
 mkdir -p ./volumes/linkedpipes2/log
+
+chmod -R ago+rwx volumes
