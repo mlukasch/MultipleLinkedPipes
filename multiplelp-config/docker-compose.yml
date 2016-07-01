@@ -5,7 +5,7 @@ services:
         volumes:
             - ../volumes/linkedpipes/data:/data
             - ../volumes/linkedpipes/log:/var/log
-            - ../docker-config/linkedpipes/configuration1.properties:/etl/deploy/configuration.properties
+            - ../multiplelp-config/linkedpipes/configuration1.properties:/etl/deploy/configuration.properties
         ports:
             - "18085:18085" # executor.webserver.port
             - "18080:18080" # Webserver & URI dereferencable URI for pipelines + templates
@@ -19,7 +19,7 @@ services:
           volumes:
               - ../volumes/linkedpipes2/data:/data
               - ../volumes/linkedpipes2/log:/var/log
-              - ../docker-config/linkedpipes/configuration2.properties:/etl/deploy/configuration.properties
+              - ../multiplelp-config/linkedpipes/configuration2.properties:/etl/deploy/configuration.properties
           ports:
               - "28085:28085" # executor.webserver.port
               - "28080:28080" # Webserver & URI dereferencable URI for pipelines + templates
