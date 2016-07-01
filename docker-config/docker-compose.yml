@@ -1,0 +1,38 @@
+version: '2'
+services:
+    linkedpipes1:
+        build: ./linkedpipes
+        volumes:
+            - ../volumes/linkedpipes/data:/data
+            - ../volumes/linkedpipes/log:/var/log
+            - ../docker-config/linkedpipes/configuration1.properties:/etl/deploy/configuration.properties
+        ports:
+            - "18085:18085" # executor.webserver.port
+            - "18080:18080" # Webserver & URI dereferencable URI for pipelines + templates
+            - "18081:18081" # executor-monitor.webserver.port
+            - "12221:12221" # executor-monitor.ftp.port
+            - "12223-12230:12223-12230" # Linked Pipes FTP data port
+            - "13300:13300" # external.port.start port for external services like Fuseki
+            - "19001:19001" # supervisord frontend
+    linkedpipes2:
+          build: ./linkedpipes
+          volumes:
+              - ../volumes/linkedpipes2/data:/data
+              - ../volumes/linkedpipes2/log:/var/log
+              - ../docker-config/linkedpipes/configuration2.properties:/etl/deploy/configuration.properties
+          ports:
+              - "28085:28085" # executor.webserver.port
+              - "28080:28080" # Webserver & URI dereferencable URI for pipelines + templates
+              - "28081:28081" # executor-monitor.webserver.port
+              - "22221:22221" # executor-monitor.ftp.port
+              - "22223-22230:22223-22230" # Linked Pipes FTP data port
+              - "23300:23300" # external.port.start port for external services like Fuseki
+              - "29001:29001" # supervisord frontend
+
+
+
+
+
+
+
+
