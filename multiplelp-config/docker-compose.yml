@@ -13,7 +13,7 @@ services:
             - "12221:12221" # executor-monitor.ftp.port
             - "12223-12230:12223-12230" # Linked Pipes FTP data port
             - "13300:13300" # external.port.start port for external services like Fuseki
-            - "19001:19001" # supervisord frontend
+            - "19001:9001" # supervisord frontend
     linkedpipes2:
           build: ./linkedpipes
           volumes:
@@ -27,7 +27,7 @@ services:
               - "22221:22221" # executor-monitor.ftp.port
               - "22223-22230:22223-22230" # Linked Pipes FTP data port
               - "23300:23300" # external.port.start port for external services like Fuseki
-              - "29001:29001" # supervisord frontend
+              - "29001:9001" # supervisord frontend
 
 
 
