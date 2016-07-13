@@ -14,20 +14,26 @@ services:
             - "12223-12230:12223-12230" # Linked Pipes FTP data port
             - "13300:13300" # external.port.start port for external services like Fuseki
             - "19001:9001" # supervisord frontend
+        links:
+            - fuseki1
+            - fuseki2
     linkedpipes2:
-          build: ./linkedpipes
-          volumes:
-              - ../volumes/linkedpipes2/data:/data
-              - ../volumes/linkedpipes2/log:/var/log
-              - ../multiplelp-config/linkedpipes/configuration2.properties:/etl/deploy/configuration.properties
-          ports:
-              - "28085:28085" # executor.webserver.port
-              - "28080:28080" # Webserver & URI dereferencable URI for pipelines + templates
-              - "28081:28081" # executor-monitor.webserver.port
-              - "22221:22221" # executor-monitor.ftp.port
-              - "22223-22230:22223-22230" # Linked Pipes FTP data port
-              - "23300:23300" # external.port.start port for external services like Fuseki
-              - "29001:9001" # supervisord frontend
+        build: ./linkedpipes
+        volumes:
+            - ../volumes/linkedpipes2/data:/data
+            - ../volumes/linkedpipes2/log:/var/log
+            - ../multiplelp-config/linkedpipes/configuration2.properties:/etl/deploy/configuration.properties
+        ports:
+            - "28085:28085" # executor.webserver.port
+            - "28080:28080" # Webserver & URI dereferencable URI for pipelines + templates
+            - "28081:28081" # executor-monitor.webserver.port
+            - "22221:22221" # executor-monitor.ftp.port
+            - "22223-22230:22223-22230" # Linked Pipes FTP data port
+            - "23300:23300" # external.port.start port for external services like Fuseki
+            - "29001:9001" # supervisord frontend
+        links:
+            - fuseki1
+            - fuseki2
     fuseki1:
         build: ./fuseki
         volumes:
