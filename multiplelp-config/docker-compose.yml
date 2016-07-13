@@ -28,7 +28,22 @@ services:
               - "22223-22230:22223-22230" # Linked Pipes FTP data port
               - "23300:23300" # external.port.start port for external services like Fuseki
               - "29001:9001" # supervisord frontend
-
+    fuseki1:
+        build: ./fuseki
+        volumes:
+            - ../volumes/fuseki1/log:/var/log
+            - ../volumes/fuseki1/data:/data
+        ports:
+            - "13030:3030"
+            - "13901:9001" # supervisord frontend
+    fuseki2:
+        build: ./fuseki
+        volumes:
+            - ../volumes/fuseki2/log:/var/log
+            - ../volumes/fuseki2/data:/data
+        ports:
+            - "23030:3030"
+            - "23901:9001" # supervisord frontend
 
 
 
