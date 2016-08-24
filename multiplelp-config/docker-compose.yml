@@ -19,6 +19,7 @@ services:
             - fuseki2
         external_links:
             - dockerconfig_triple_store_staging_1:triple_store_staging
+            - dockerconfig_sshserver_1:sshserver
     linkedpipes2:
         build: ./linkedpipes
         volumes:
@@ -38,6 +39,7 @@ services:
             - fuseki2
         external_links:
             - dockerconfig_triple_store_staging_1:triple_store_staging
+            - dockerconfig_sshserver_1:sshserver
     fuseki1:
         build: ./fuseki
         volumes:
