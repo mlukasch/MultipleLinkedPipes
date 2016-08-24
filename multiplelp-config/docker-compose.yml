@@ -54,6 +54,10 @@ services:
         ports:
             - "23030:3030"
             - "23901:9001" # supervisord frontend
+networks:
+    default:
+        external:
+            name: dockerconfig_default
 
 
 
