@@ -1,7 +1,7 @@
-FROM gliderlabs/alpine:3.3
+FROM gliderlabs/alpine:3.4
 
 RUN apk update && \
-    apk add --update nodejs wget openjdk8 git tar supervisor
+    apk add --update git wget supervisor tar openjdk8 openssh nodejs
 ENV JAVA_HOME /usr/lib/jvm/default-jvm
 
 # Install Maven:
@@ -14,18 +14,24 @@ RUN wget http://apache.mirror.digionline.de/maven/maven-3/$MAVEN_VERSION/binarie
 ENV PATH $PATH:$M2_HOME/bin
 
 # Install LinkedPipes
-RUN git clone https://github.com/linkedpipes/etl.git
-RUN cd etl && git checkout develop && mvn install
-#RUN cd etl && mvn install
+RUN git clone https://github.com/linkedpipes/etl.git /etl
+RUN cd /etl && git checkout master
+RUN cd /etl && mvn install
 RUN chmod uag+rx /etl/deploy/executor.sh && \
     chmod uag+rx /etl/deploy/executor-monitor.sh && \
     chmod uag+rx /etl/deploy/frontend.sh
-#COPY ./configuration.properties /etl/deploy/configuration.properties
+COPY ./configuration_update.properties /etl/deploy/configuration.properties
 
-# Persist Directory for data in LinkedPipes:
-# VOLUME /data
-# Persist Directory for log files of the Executor, Executor-Monitor, Frontend:
-# VOLUME /var/log/supervisor
+# Install FDP-to-RDF-component:
+ENV URL_FDP2RDF_COMPONENT https://github.com/opendatacz/lp-etl-components/raw/master/t-fdpToRdf/deploy/t-fdpToRdf.zip
+RUN cd /etl/deploy/jars && \
+    wget $URL_FDP2RDF_COMPONENT && \
+    unzip ./t-fdpToRdf.zip && \
+    rm -rf ./t-fdpToRdf.zip
+
+# Add Timezone:
+RUN apk add tzdata && cp /usr/share/zoneinfo/Europe/Berlin /etc/localtime && \
+    echo "Europe/Berlin" > /etc/timezone
 
 EXPOSE \
     # executor.webserver.port:

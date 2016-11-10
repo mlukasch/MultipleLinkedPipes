@@ -5,7 +5,7 @@ services:
         volumes:
             - ../volumes/linkedpipes/data:/data
             - ../volumes/linkedpipes/log:/var/log
-            - ../multiplelp-config/linkedpipes/configuration1.properties:/etl/deploy/configuration.properties
+            - ../multiplelp-config/linkedpipes/configuration_update_1.properties:/etl/deploy/configuration.properties
         ports:
             - "18085:18085" # executor.webserver.port
             - "18080:18080" # Webserver & URI dereferencable URI for pipelines + templates
@@ -20,12 +20,13 @@ services:
         external_links:
             - dockerconfig_triple_store_staging_1:triple_store_staging
             - dockerconfig_sshserver_1:sshserver
+            - dockerconfig_virtuoso_staging_1:virtuoso_staging
     linkedpipes2:
         build: ./linkedpipes
         volumes:
             - ../volumes/linkedpipes2/data:/data
             - ../volumes/linkedpipes2/log:/var/log
-            - ../multiplelp-config/linkedpipes/configuration2.properties:/etl/deploy/configuration.properties
+            - ../multiplelp-config/linkedpipes/configuration_update_2.properties:/etl/deploy/configuration.properties
         ports:
             - "28085:28085" # executor.webserver.port
             - "28080:28080" # Webserver & URI dereferencable URI for pipelines + templates
@@ -40,6 +41,7 @@ services:
         external_links:
             - dockerconfig_triple_store_staging_1:triple_store_staging
             - dockerconfig_sshserver_1:sshserver
+            - dockerconfig_virtuoso_staging_1:virtuoso_staging
     fuseki1:
         build: ./fuseki
         volumes:
