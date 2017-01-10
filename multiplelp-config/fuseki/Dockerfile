@@ -1,7 +1,7 @@
 FROM gliderlabs/alpine:3.3
 
 RUN apk update && \
-    apk add --update tar openjdk8 wget supervisor
+    apk add --update tar supervisor openjdk8 wget
 
 # Download Fuseki:
 ENV FUSEKI_VERSION 2.4.1
